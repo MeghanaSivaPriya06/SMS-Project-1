@@ -1,0 +1,120 @@
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html lang="en">&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta charset="UTF-8">&ndash;&gt;-->
+<!--&lt;!&ndash;    <meta name="viewport" content="width=device-width, initial-scale=1.0">&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Simple Form</title>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+<!--&lt;!&ndash;    <h2>Contact Form</h2>&ndash;&gt;-->
+<!--&lt;!&ndash;    <form id="add_contact">&ndash;&gt;-->
+<!--&lt;!&ndash;        <label for="name">Name:</label><br>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="text" id="name" name="name" required><br><br>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <label for="phone">Phone Number:</label><br>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="tel" id="phone" name="phone" required><br><br>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <label for="email">Email:</label><br>&ndash;&gt;-->
+<!--&lt;!&ndash;        <input type="email" id="email" name="email" required><br><br>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        <button type="button" onclick="storeData()">Submit</button>&ndash;&gt;-->
+<!--&lt;!&ndash;    </form>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <h3>Stored Data:</h3>&ndash;&gt;-->
+<!--&lt;!&ndash;    <div id="output"></div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <script>&ndash;&gt;-->
+<!--&lt;!&ndash;        const data = [];&ndash;&gt;-->
+
+<!--&lt;!&ndash;        function storeData() {&ndash;&gt;-->
+<!--&lt;!&ndash;            const name = document.getElementById("name").value;&ndash;&gt;-->
+<!--&lt;!&ndash;            const phone = document.getElementById("phone").value;&ndash;&gt;-->
+<!--&lt;!&ndash;            const email = document.getElementById("email").value;&ndash;&gt;-->
+
+<!--&lt;!&ndash;            data.push({ name, phone, email });&ndash;&gt;-->
+<!--&lt;!&ndash;            displayData();&ndash;&gt;-->
+<!--&lt;!&ndash;            document.getElementById("contactForm").reset();&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+
+<!--&lt;!&ndash;        function displayData() {&ndash;&gt;-->
+<!--&lt;!&ndash;            const output = document.getElementById("output");&ndash;&gt;-->
+<!--&lt;!&ndash;            output.innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";&ndash;&gt;-->
+<!--&lt;!&ndash;        }&ndash;&gt;-->
+<!--&lt;!&ndash;    </script>&ndash;&gt;-->
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Add Contact</title>-->
+<!--    <link rel="stylesheet" href="{% static 'css/style.css' %}">  &lt;!&ndash; Link to your CSS file &ndash;&gt;-->
+<!--</head>-->
+<!--<body>-->
+<!--    <div class="container">-->
+<!--        <h1>Add Contact</h1>-->
+<!--        <form method="POST" action="{% url 'add_contact' %}">-->
+<!--            {% csrf_token %}-->
+<!--            <div class="form-group">-->
+<!--                <label for="name">Name:</label>-->
+<!--                <input type="text" id="name" name="name" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="email">Email:</label>-->
+<!--                <input type="email" id="email" name="email" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="phone">Phone Number:</label>-->
+<!--                <input type="tel" id="phone" name="phone" required>-->
+<!--            </div>-->
+<!--            <div class="form-group">-->
+<!--                <label for="address">Address:</label>-->
+<!--                <textarea id="address" name="address" rows="4" required></textarea>-->
+<!--            </div>-->
+<!--            <button type="submit">Add Contact</button>-->
+<!--        </form>-->
+<!--    </div>-->
+<!--</body>-->
+<!--</html>-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Contact</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}"> <!-- Include your CSS here -->
+</head>
+<body>
+    <div class="container">
+        <h1>Add Contact</h1>
+        <form method="POST" action="{% url 'add_contact' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="phone">Phone Number:</label>
+                <input type="tel" id="phone" name="phone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" required></textarea>
+            </div>
+
+            <button type="submit">Add Contact</button>
+        </form>
+    </div>
+</body>
+</html>

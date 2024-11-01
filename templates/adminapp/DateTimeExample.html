@@ -1,0 +1,67 @@
+{% extends 'Navbar/Projectnavbar.html' %}
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DateTime Example</title>
+</head>
+<body>
+
+{% block body %}
+<div class="container text-center">
+  <div class="row">
+    <div class="col">
+      <h2>Select Country</h2>
+      <div>
+        <form method="get">
+            {% csrf_token %}
+            <label>Select Country:</label>
+            <select name="country" class="form-control">
+                {% for country in countries %}
+                    <option value="{{ country }}" {% if country == selected_country %}selected{% endif %}>{{ country }}</option>
+                {% endfor %}
+            </select>
+            <br>
+            <div class="d-grid gap-2 col-6 mx-auto">
+                <button class="btn btn-primary" type="submit">Get Time</button>
+            </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="col-auto d-flex align-items-center">
+      <div style="border-left: 2px solid black; height: 100%;"></div>
+    </div>
+
+    <div class="col">
+        <h1>Current Date and Time</h1>
+        <div>
+            <p id="local-time" class="local-time"><strong>Local Time:</strong> {{ current_time }}</p>
+            <p id="country-time" class="country-time"><strong>Time in {{ selected_country }}:</strong> {{ country_time }}</p>
+        </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    function updateTime() {
+        const localTimeElement = document.getElementById('local-time');
+        const countryTimeElement = document.getElementById('country-time');
+        const selectedCountry = "{{ selected_country }}";
+
+        setInterval(() => {
+            const now = new Date();
+            localTimeElement.textContent = Local Time: ${now.toLocaleString()};
+
+            // Adjust for the selected country's time (for demonstration purposes)
+            const countryTime = new Date(now.getTime() + (now.getTimezoneOffset() * 60000) + (3600000 * {{ country_offset }}));
+            countryTimeElement.textContent = Time in ${selectedCountry}: ${countryTime.toLocaleString()};
+        }, 1000);
+    }
+
+    window.onload = updateTime;
+</script>
+{% endblock %}
+
+</body>
+</html>
